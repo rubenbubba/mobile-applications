@@ -1,11 +1,13 @@
 import { View, StyleSheet } from 'react-native';
+import { spacing, type SpaceKey } from '../../theme/tokens';
 
 interface RowProps {
   children: React.ReactNode;
-  gap?: 'none' | 'sm' | 'md' | 'lg';
+  gap?: SpaceKey;
   align?: 'flex-start' | 'center' | 'flex-end' | 'stretch';
   justify?: 'flex-start' | 'center' | 'flex-end' | 'space-between';
   wrap?: boolean;
+  flex?: number;
 }
 
 export function Row({
@@ -14,14 +16,15 @@ export function Row({
   align = 'center',
   justify = 'flex-start',
   wrap = false,
+  flex,
 }: RowProps) {
   return (
     <View
       style={[
         styles.base,
-        styles[`gap_${gap}` as keyof typeof styles],
-        { alignItems: align, justifyContent: justify },
+        { gap: spacing[gap], alignItems: align, justifyContent: justify },
         wrap && styles.wrap,
+        flex !== undefined && { flex },
       ]}
     >
       {children}
@@ -30,10 +33,6 @@ export function Row({
 }
 
 const styles = StyleSheet.create({
-  base: { flexDirection: 'row' },
+  base: { flexDirection: 'row', minWidth: 0 },
   wrap: { flexWrap: 'wrap' },
-  gap_none: {},
-  gap_sm: {},
-  gap_md: {},
-  gap_lg: {},
 });

@@ -1,15 +1,34 @@
 import { View, StyleSheet } from 'react-native';
+import { useTheme } from '../../theme/useTheme';
+import { radii, spacing, type ToneName } from '../../theme/tokens';
+import { Icon, type IoniconsName } from './Icon';
 import { Text } from './Text';
+
+type BadgeVariant = 'default' | 'success' | 'warning' | 'serious' | 'error';
 
 interface BadgeProps {
   label: string;
-  variant?: 'default' | 'success' | 'warning' | 'error';
+  variant?: BadgeVariant;
+  icon?: IoniconsName;
+  testID?: string;
 }
 
-export function Badge({ label, variant = 'default' }: BadgeProps) {
+const variantTones: Record<BadgeVariant, ToneName> = {
+  default: 'neutral',
+  success: 'healthy',
+  warning: 'warning',
+  serious: 'serious',
+  error: 'critical',
+};
+
+export function Badge({ label, variant = 'default', icon, testID }: BadgeProps) {
+  const { colors } = useTheme();
+  const tone = colors.tones[variantTones[variant]];
+
   return (
-    <View style={[styles.base, styles[variant]]}>
-      <Text size="sm">{label}</Text>
+    <View style={[styles.base, { backgroundColor: tone.background }]} testID={testID}>
+      {icon !== undefined && <Icon name={icon} size={14} color={tone.text} />}
+      <Text size="xs" weight="semibold" color={tone.text}>{label}</Text>
     </View>
   );
 }
@@ -17,20 +36,11 @@ export function Badge({ label, variant = 'default' }: BadgeProps) {
 const styles = StyleSheet.create({
   base: {
     alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
     paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 999,
-  },
-  default: {
-    backgroundColor: '#e5e7eb',
-  },
-  success: {
-    backgroundColor: '#d1fae5',
-  },
-  warning: {
-    backgroundColor: '#fef3c7',
-  },
-  error: {
-    backgroundColor: '#fee2e2',
+    paddingVertical: spacing.xs,
+    borderRadius: radii.pill,
   },
 });

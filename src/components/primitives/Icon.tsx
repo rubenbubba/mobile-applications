@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet } from 'react-native';
+import { useTheme } from '../../theme/useTheme';
 
-type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
+export type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
 
 interface IconProps {
   name: IoniconsName;
@@ -10,9 +10,7 @@ interface IconProps {
 }
 
 export function Icon({ name, size = 24, color }: IconProps) {
-  return <Ionicons name={name} size={size} color={color} style={styles.base} />;
-}
+  const { colors } = useTheme();
 
-const styles = StyleSheet.create({
-  base: {},
-});
+  return <Ionicons name={name} size={size} color={color ?? colors.text} aria-hidden />;
+}

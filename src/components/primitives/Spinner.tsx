@@ -1,4 +1,5 @@
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import { useTheme } from '../../theme/useTheme';
 
 interface SpinnerProps {
   size?: 'small' | 'large';
@@ -6,9 +7,7 @@ interface SpinnerProps {
 }
 
 export function Spinner({ size = 'small', color }: SpinnerProps) {
-  return <ActivityIndicator size={size} color={color} style={styles.base} />;
-}
+  const { colors } = useTheme();
 
-const styles = StyleSheet.create({
-  base: {},
-});
+  return <ActivityIndicator size={size} color={color ?? colors.accent} />;
+}

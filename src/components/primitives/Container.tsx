@@ -1,23 +1,16 @@
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import { spacing, type SpaceKey } from '../../theme/tokens';
 
 interface ContainerProps {
   children: React.ReactNode;
   flex?: number;
-  padding?: 'none' | 'sm' | 'md' | 'lg';
+  padding?: SpaceKey;
 }
 
 export function Container({ children, flex, padding = 'none' }: ContainerProps) {
   return (
-    <View style={[styles.base, flex !== undefined && { flex }, styles[padding]]}>
+    <View style={[{ padding: spacing[padding] }, flex !== undefined && { flex }]}>
       {children}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  base: {},
-  none: {},
-  sm: {},
-  md: {},
-  lg: {},
-});

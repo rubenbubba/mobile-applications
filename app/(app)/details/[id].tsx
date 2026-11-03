@@ -1,21 +1,21 @@
 import { useLocalSearchParams } from 'expo-router';
-import { Screen } from '../../../src/components/primitives/Screen';
-import { Stack } from '../../../src/components/primitives/Stack';
-import { Text } from '../../../src/components/primitives/Text';
+import { BackButton, IssueDetailPanel } from '@/components/issues/IssueDetailPanel';
+import { OverviewGate } from '@/components/shared/OverviewGate';
+import { PageLayout } from '@/components/shell/PageLayout';
+import { useOverview } from '@/hooks/useOverview';
+import { ISSUE_IDS } from '@/logic/issueRules';
 
-export default function DetailScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
-
-  console.log('Detail screen opened for item:', id);
-
-  return (
-    <Screen padding="lg">
-      <Stack gap="md">
-        <Text size="xl" weight="bold">Item Detail</Text>
-        <Text size="sm">ID: {id}</Text>
-        <Text>Implement getItemById() in your itemService and render your data here.</Text>
-      </Stack>
-    </Screen>
-  );
+export function generateStaticParams(): Record<string, string>[] {
+  return ISSUE_IDS.map((id) => ({ id }));
 }
 
+export default function IssueDetailScreen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const state = useOverview();
+
+  return (
+    <PageLayout testID="screen-issue-detail" leading={<BackButton />}>
+      <OverviewGate state={state}>{(overview) => <IssueDetailPanel overview={overview} issueId={id} />}</OverviewGate>
+    </PageLayout>
+  );
+}
