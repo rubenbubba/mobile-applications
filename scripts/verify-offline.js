@@ -89,7 +89,15 @@ async function main() {
   const stopServer = await startServer();
   const chrome = spawn(
     chromePath,
-    ['--headless=new', `--remote-debugging-port=${DEBUG_PORT}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'vitrine-offline-'))}`, '--no-first-run', 'about:blank'],
+    [
+      '--headless=new',
+      `--remote-debugging-port=${DEBUG_PORT}`,
+      `--user-data-dir=${mkdtempSync(join(tmpdir(), 'vitrine-offline-'))}`,
+      '--no-first-run',
+      // Linux CI machines block Chrome's sandbox. Only switched off there, never on a developer's machine.
+      ...(process.env.CI ? ['--no-sandbox'] : []),
+      'about:blank',
+    ],
     { stdio: 'ignore' },
   );
 
