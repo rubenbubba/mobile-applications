@@ -4,6 +4,8 @@ Vitrine helps small business owners see how they are doing online, and what to f
 
 This is the Progressive Web App for assignment 1 of Mobile Applications at UCLL. It is built on the course's Expo starter, and the same code becomes the native app in assignment 2.
 
+📄 **Paper:** [paper/PAPER.md](paper/PAPER.md): problem statement, user research, features, competitors, wireframes, roadmap and MoSCoW. The user testing kit is in [paper/user-testing/](paper/user-testing/).
+
 > **This version runs on demo data.** All businesses are fictional, and every screen labels its data source. The one exception is "Test a website now" on the Website screen, which is a real test from your device. See [TODOS.md](TODOS.md) for what is needed to connect real data.
 
 ## What's in the app

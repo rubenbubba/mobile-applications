@@ -1,0 +1,306 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 1350" width="1040" height="1350" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+    </marker>
+  </defs>
+  <rect width="1040" height="1350" fill="#ffffff"/>
+
+  <text x="40" y="38" font-size="18" font-weight="bold" fill="#111">Vitrine: low-fidelity wireframes</text>
+  <text x="40" y="58" font-size="11" fill="#444">Numbered screens and the actions between them. Core scenario: see what is wrong, fix it, confirm it with a new check.</text>
+
+  <!-- ===================== ROW 1 ===================== -->
+  <!-- 1 Login -->
+  <rect x="40" y="80" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <circle cx="130" cy="140" r="18" fill="#ddd" stroke="#444"/>
+  <text x="130" y="180" font-size="14" font-weight="bold" text-anchor="middle" fill="#222">Vitrine</text>
+  <rect x="60" y="188" width="140" height="6" fill="#ccc"/>
+  <rect x="52" y="208" width="156" height="192" rx="8" fill="none" stroke="#999"/>
+  <rect x="62" y="218" width="136" height="18" rx="3" fill="#eee"/>
+  <text x="70" y="231" font-size="9" fill="#444">Demo mode note</text>
+  <text x="62" y="254" font-size="9" fill="#444">Email</text>
+  <rect x="62" y="258" width="136" height="20" fill="#fff" stroke="#888"/>
+  <text x="62" y="294" font-size="9" fill="#444">Password</text>
+  <rect x="62" y="298" width="136" height="20" fill="#fff" stroke="#888"/>
+  <rect x="62" y="330" width="136" height="24" rx="4" fill="#555"/>
+  <text x="130" y="346" font-size="11" text-anchor="middle" fill="#fff">Log in</text>
+  <rect x="62" y="362" width="136" height="24" rx="4" fill="none" stroke="#888"/>
+  <text x="130" y="378" font-size="9" text-anchor="middle" fill="#333">Use the demo account</text>
+
+  <!-- 2 Home -->
+  <rect x="300" y="80" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="312" y="108" font-size="12" font-weight="bold" fill="#222">Business name</text>
+  <rect x="312" y="114" width="80" height="5" fill="#ccc"/>
+  <rect x="310" y="126" width="160" height="130" rx="8" fill="none" stroke="#999"/>
+  <text x="322" y="160" font-size="26" font-weight="bold" fill="#222">70</text>
+  <text x="358" y="160" font-size="11" fill="#555">/ 100</text>
+  <rect x="408" y="140" width="52" height="14" rx="7" fill="#ddd"/>
+  <text x="434" y="150" font-size="7" text-anchor="middle" fill="#333">Needs work</text>
+  <rect x="322" y="170" width="136" height="6" fill="#e6e6e6"/>
+  <rect x="322" y="170" width="95" height="6" fill="#777"/>
+  <rect x="322" y="184" width="120" height="6" fill="#ccc"/>
+  <rect x="322" y="194" width="90" height="5" fill="#ddd"/>
+  <rect x="322" y="206" width="136" height="20" rx="4" fill="#555"/>
+  <text x="390" y="220" font-size="9" text-anchor="middle" fill="#fff">See what to fix first</text>
+  <rect x="322" y="230" width="136" height="18" rx="4" fill="none" stroke="#888"/>
+  <text x="390" y="243" font-size="9" text-anchor="middle" fill="#333">Run new check</text>
+  <rect x="310" y="264" width="77" height="50" rx="6" fill="none" stroke="#999"/>
+  <rect x="393" y="264" width="77" height="50" rx="6" fill="none" stroke="#999"/>
+  <rect x="310" y="320" width="77" height="50" rx="6" fill="none" stroke="#999"/>
+  <rect x="393" y="320" width="77" height="50" rx="6" fill="none" stroke="#999"/>
+  <text x="318" y="280" font-size="8" fill="#444">Website</text>
+  <text x="401" y="280" font-size="8" fill="#444">Reviews</text>
+  <text x="318" y="336" font-size="8" fill="#444">Google</text>
+  <text x="401" y="336" font-size="8" fill="#444">Speed</text>
+  <rect x="318" y="290" width="30" height="10" fill="#bbb"/>
+  <rect x="401" y="290" width="30" height="10" fill="#bbb"/>
+  <rect x="318" y="346" width="30" height="10" fill="#bbb"/>
+  <rect x="401" y="346" width="30" height="10" fill="#bbb"/>
+  <line x1="300" y1="384" x2="480" y2="384" stroke="#999"/>
+  <circle cx="318" cy="400" r="6" fill="#888"/><circle cx="354" cy="400" r="6" fill="#ccc"/><circle cx="390" cy="400" r="6" fill="#ccc"/><circle cx="426" cy="400" r="6" fill="#ccc"/><circle cx="462" cy="400" r="6" fill="#ccc"/>
+  <circle cx="360" cy="393" r="4" fill="#222"/>
+
+  <!-- 3 Issues -->
+  <rect x="560" y="80" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="572" y="108" font-size="12" font-weight="bold" fill="#222">Issues</text>
+  <rect x="572" y="118" width="32" height="14" rx="7" fill="#555"/>
+  <text x="588" y="128" font-size="8" text-anchor="middle" fill="#fff">All</text>
+  <rect x="608" y="118" width="44" height="14" rx="7" fill="none" stroke="#888"/>
+  <text x="630" y="128" font-size="8" text-anchor="middle" fill="#333">Website</text>
+  <rect x="656" y="118" width="40" height="14" rx="7" fill="none" stroke="#888"/>
+  <text x="676" y="128" font-size="8" text-anchor="middle" fill="#333">Google</text>
+  <rect x="700" y="118" width="28" height="14" rx="7" fill="none" stroke="#888"/>
+  <text x="714" y="128" font-size="8" text-anchor="middle" fill="#333">...</text>
+  <g fill="none" stroke="#999">
+    <rect x="570" y="142" width="160" height="42" rx="6"/>
+    <rect x="570" y="190" width="160" height="42" rx="6"/>
+    <rect x="570" y="238" width="160" height="42" rx="6"/>
+    <rect x="570" y="286" width="160" height="42" rx="6"/>
+  </g>
+  <circle cx="582" cy="163" r="5" fill="#222"/><circle cx="582" cy="211" r="5" fill="#555"/><circle cx="582" cy="259" r="5" fill="#888"/><circle cx="582" cy="307" r="5" fill="#bbb"/>
+  <rect x="594" y="154" width="100" height="6" fill="#bbb"/><rect x="594" y="166" width="70" height="5" fill="#ddd"/>
+  <rect x="594" y="202" width="100" height="6" fill="#bbb"/><rect x="594" y="214" width="70" height="5" fill="#ddd"/>
+  <rect x="594" y="250" width="100" height="6" fill="#bbb"/><rect x="594" y="262" width="70" height="5" fill="#ddd"/>
+  <rect x="594" y="298" width="100" height="6" fill="#bbb"/><rect x="594" y="310" width="70" height="5" fill="#ddd"/>
+  <text x="716" y="168" font-size="14" fill="#666">&#8250;</text><text x="716" y="216" font-size="14" fill="#666">&#8250;</text><text x="716" y="264" font-size="14" fill="#666">&#8250;</text><text x="716" y="312" font-size="14" fill="#666">&#8250;</text>
+  <line x1="560" y1="384" x2="740" y2="384" stroke="#999"/>
+  <circle cx="578" cy="400" r="6" fill="#ccc"/><circle cx="614" cy="400" r="6" fill="#888"/><circle cx="650" cy="400" r="6" fill="#ccc"/><circle cx="686" cy="400" r="6" fill="#ccc"/><circle cx="722" cy="400" r="6" fill="#ccc"/>
+
+  <!-- 4 Issue detail -->
+  <rect x="820" y="80" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="832" y="104" font-size="10" fill="#444">&#8249; Issues</text>
+  <text x="832" y="124" font-size="11" font-weight="bold" fill="#222">Issue title</text>
+  <rect x="832" y="132" width="44" height="14" rx="7" fill="#ddd"/>
+  <text x="854" y="142" font-size="7" text-anchor="middle" fill="#333">Severity</text>
+  <text x="832" y="166" font-size="9" font-weight="bold" fill="#333">What is wrong</text>
+  <rect x="832" y="172" width="150" height="5" fill="#ccc"/><rect x="832" y="181" width="130" height="5" fill="#ccc"/>
+  <text x="832" y="202" font-size="9" font-weight="bold" fill="#333">Why it matters</text>
+  <rect x="832" y="208" width="150" height="5" fill="#ccc"/><rect x="832" y="217" width="120" height="5" fill="#ccc"/>
+  <text x="832" y="238" font-size="9" font-weight="bold" fill="#333">How to fix it</text>
+  <text x="832" y="256" font-size="8" fill="#333">1</text><rect x="842" y="251" width="130" height="5" fill="#ccc"/>
+  <text x="832" y="272" font-size="8" fill="#333">2</text><rect x="842" y="267" width="120" height="5" fill="#ccc"/>
+  <text x="832" y="288" font-size="8" fill="#333">3</text><rect x="842" y="283" width="110" height="5" fill="#ccc"/>
+  <rect x="832" y="336" width="156" height="24" rx="4" fill="#555"/>
+  <text x="910" y="352" font-size="10" text-anchor="middle" fill="#fff">Mark as fixed</text>
+  <text x="910" y="378" font-size="7" text-anchor="middle" fill="#666">Score changes after the next check</text>
+
+  <!-- Row 1 badges + labels -->
+  <g font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">
+    <circle cx="40" cy="80" r="13" fill="#222"/><text x="40" y="84">1</text>
+    <circle cx="300" cy="80" r="13" fill="#222"/><text x="300" y="84">2</text>
+    <circle cx="560" cy="80" r="13" fill="#222"/><text x="560" y="84">3</text>
+    <circle cx="820" cy="80" r="13" fill="#222"/><text x="820" y="84">4</text>
+  </g>
+  <g font-size="12" font-weight="bold" text-anchor="middle" fill="#222">
+    <text x="130" y="442">1 Log in</text>
+    <text x="390" y="442">2 Home</text>
+    <text x="650" y="442">3 Issues</text>
+    <text x="910" y="442">4 Issue detail</text>
+  </g>
+
+  <!-- Row 1 arrows -->
+  <line x1="222" y1="250" x2="296" y2="250" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="259" y="242" font-size="9" text-anchor="middle" fill="#222">Log in</text>
+  <line x1="482" y1="216" x2="556" y2="216" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="519" y="198" font-size="9" text-anchor="middle" fill="#222">See what to</text>
+  <text x="519" y="209" font-size="9" text-anchor="middle" fill="#222">fix first</text>
+  <line x1="742" y1="250" x2="816" y2="250" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="779" y="242" font-size="9" text-anchor="middle" fill="#222">Tap an issue</text>
+  <line x1="816" y1="300" x2="742" y2="300" stroke="#222" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="779" y="316" font-size="8" text-anchor="middle" fill="#222">Mark as fixed,</text>
+  <text x="779" y="326" font-size="8" text-anchor="middle" fill="#222">toast with Undo</text>
+
+  <!-- Arrows from the tab bar of 2 to row 2 -->
+  <path d="M370,452 C370,492 130,478 130,514" fill="none" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="236" y="478" font-size="9" text-anchor="middle" fill="#222">Website tab</text>
+  <path d="M390,452 L390,514" fill="none" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="396" y="490" font-size="9" fill="#222">Reviews tab</text>
+  <path d="M410,452 C410,492 650,478 650,514" fill="none" stroke="#222" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="548" y="478" font-size="9" text-anchor="middle" fill="#222">Settings tab</text>
+
+  <!-- ===================== ROW 2 ===================== -->
+  <!-- 5 Website / Google / Speed -->
+  <rect x="40" y="520" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="52" y="548" font-size="12" font-weight="bold" fill="#222">Website</text>
+  <rect x="52" y="558" width="156" height="18" rx="9" fill="none" stroke="#888"/>
+  <rect x="52" y="558" width="52" height="18" rx="9" fill="#555"/>
+  <text x="78" y="570" font-size="8" text-anchor="middle" fill="#fff">Website</text>
+  <text x="130" y="570" font-size="8" text-anchor="middle" fill="#333">Google</text>
+  <text x="182" y="570" font-size="8" text-anchor="middle" fill="#333">Speed</text>
+  <rect x="50" y="586" width="160" height="60" rx="8" fill="none" stroke="#999"/>
+  <circle cx="66" cy="606" r="6" fill="#444"/>
+  <text x="78" y="610" font-size="10" font-weight="bold" fill="#222">Online</text>
+  <rect x="66" y="622" width="110" height="5" fill="#ccc"/><rect x="66" y="632" width="80" height="5" fill="#ccc"/>
+  <g fill="none" stroke="#ccc">
+    <rect x="50" y="656" width="160" height="20"/>
+    <rect x="50" y="680" width="160" height="20"/>
+    <rect x="50" y="704" width="160" height="20"/>
+  </g>
+  <text x="56" y="669" font-size="8" fill="#333">Availability, 30 days</text>
+  <text x="56" y="693" font-size="8" fill="#333">Response time</text>
+  <text x="56" y="717" font-size="8" fill="#333">HTTPS and certificate</text>
+  <rect x="172" y="663" width="30" height="6" fill="#bbb"/><rect x="172" y="687" width="30" height="6" fill="#bbb"/><rect x="172" y="711" width="30" height="6" fill="#bbb"/>
+  <rect x="50" y="736" width="160" height="72" rx="8" fill="none" stroke="#999"/>
+  <text x="58" y="753" font-size="9" font-weight="bold" fill="#222">Test a website now</text>
+  <rect x="58" y="762" width="100" height="18" fill="#fff" stroke="#888"/>
+  <rect x="162" y="762" width="40" height="18" rx="3" fill="#555"/>
+  <text x="182" y="774" font-size="8" text-anchor="middle" fill="#fff">Test</text>
+  <rect x="58" y="788" width="120" height="5" fill="#ddd"/>
+  <line x1="40" y1="824" x2="220" y2="824" stroke="#999"/>
+  <circle cx="58" cy="840" r="6" fill="#ccc"/><circle cx="94" cy="840" r="6" fill="#ccc"/><circle cx="130" cy="840" r="6" fill="#888"/><circle cx="166" cy="840" r="6" fill="#ccc"/><circle cx="202" cy="840" r="6" fill="#ccc"/>
+
+  <!-- 6 Reviews -->
+  <rect x="300" y="520" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="312" y="548" font-size="12" font-weight="bold" fill="#222">Reviews</text>
+  <rect x="310" y="558" width="160" height="70" rx="8" fill="none" stroke="#999"/>
+  <text x="322" y="594" font-size="22" font-weight="bold" fill="#222">4.1</text>
+  <text x="362" y="592" font-size="12" fill="#444">&#9733;&#9733;&#9733;&#9733;&#9734;</text>
+  <rect x="322" y="606" width="100" height="5" fill="#ccc"/>
+  <rect x="310" y="636" width="160" height="50" rx="6" fill="none" stroke="#ccc"/>
+  <polyline points="318,676 345,668 372,671 399,660 426,664 462,650" fill="none" stroke="#555" stroke-width="2"/>
+  <rect x="310" y="694" width="160" height="56" rx="6" fill="none" stroke="#999"/>
+  <text x="318" y="710" font-size="9" fill="#444">&#9733;&#9733;&#9734;&#9734;&#9734;</text>
+  <rect x="318" y="717" width="130" height="5" fill="#ccc"/><rect x="318" y="726" width="110" height="5" fill="#ccc"/>
+  <rect x="404" y="733" width="60" height="13" rx="3" fill="none" stroke="#888"/>
+  <text x="434" y="743" font-size="7" text-anchor="middle" fill="#333">Reply</text>
+  <rect x="310" y="756" width="160" height="56" rx="6" fill="none" stroke="#999"/>
+  <text x="318" y="772" font-size="9" fill="#444">&#9733;&#9733;&#9733;&#9733;&#9733;</text>
+  <rect x="318" y="779" width="130" height="5" fill="#ccc"/><rect x="318" y="788" width="110" height="5" fill="#ccc"/>
+  <text x="434" y="805" font-size="7" text-anchor="middle" fill="#333">Replied</text>
+  <line x1="300" y1="824" x2="480" y2="824" stroke="#999"/>
+  <circle cx="318" cy="840" r="6" fill="#ccc"/><circle cx="354" cy="840" r="6" fill="#ccc"/><circle cx="390" cy="840" r="6" fill="#ccc"/><circle cx="426" cy="840" r="6" fill="#888"/><circle cx="462" cy="840" r="6" fill="#ccc"/>
+
+  <!-- 7 Settings -->
+  <rect x="560" y="520" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="572" y="548" font-size="12" font-weight="bold" fill="#222">Settings</text>
+  <text x="572" y="568" font-size="8" fill="#666">Business</text>
+  <circle cx="580" cy="582" r="5" fill="#444"/><rect x="592" y="579" width="100" height="6" fill="#bbb"/>
+  <circle cx="580" cy="598" r="5" fill="none" stroke="#444"/><rect x="592" y="595" width="90" height="6" fill="#bbb"/>
+  <circle cx="580" cy="614" r="5" fill="none" stroke="#444"/><rect x="592" y="611" width="96" height="6" fill="#bbb"/>
+  <text x="572" y="640" font-size="8" fill="#666">Theme</text>
+  <rect x="572" y="646" width="156" height="18" rx="9" fill="none" stroke="#888"/>
+  <text x="650" y="659" font-size="8" text-anchor="middle" fill="#333">System | Light | Dark</text>
+  <text x="572" y="684" font-size="8" fill="#666">Install the app</text>
+  <rect x="572" y="690" width="156" height="20" rx="4" fill="#555"/>
+  <text x="650" y="704" font-size="9" text-anchor="middle" fill="#fff">Install</text>
+  <text x="572" y="726" font-size="8" fill="#666">Data sources</text>
+  <rect x="572" y="732" width="156" height="12" fill="#eee"/><rect x="572" y="748" width="156" height="12" fill="#eee"/><rect x="572" y="764" width="156" height="12" fill="#eee"/>
+  <rect x="572" y="784" width="74" height="20" rx="4" fill="none" stroke="#888"/>
+  <text x="609" y="798" font-size="8" text-anchor="middle" fill="#333">Reset demo</text>
+  <rect x="654" y="784" width="74" height="20" rx="4" fill="none" stroke="#888"/>
+  <text x="691" y="798" font-size="8" text-anchor="middle" fill="#333">Log out</text>
+  <line x1="560" y1="824" x2="740" y2="824" stroke="#999"/>
+  <circle cx="578" cy="840" r="6" fill="#ccc"/><circle cx="614" cy="840" r="6" fill="#ccc"/><circle cx="650" cy="840" r="6" fill="#ccc"/><circle cx="686" cy="840" r="6" fill="#ccc"/><circle cx="722" cy="840" r="6" fill="#888"/>
+
+  <!-- Legend -->
+  <rect x="820" y="520" width="180" height="340" rx="8" fill="#fafafa" stroke="#ccc"/>
+  <text x="832" y="546" font-size="12" font-weight="bold" fill="#222">How to read this</text>
+  <g font-size="10" fill="#333">
+    <text x="832" y="570">Numbers are screens.</text>
+    <text x="832" y="590">Solid arrow: a user action.</text>
+    <text x="832" y="606">Dashed arrow: back, with</text>
+    <text x="832" y="622">feedback (a toast).</text>
+    <text x="832" y="646">The tab bar on 2, 3, 5, 6</text>
+    <text x="832" y="662">and 7 is always one tap</text>
+    <text x="832" y="678">away, within thumb reach.</text>
+    <text x="832" y="702">7 to 1: Log out.</text>
+    <text x="832" y="726">2a to 2c and 6b are states</text>
+    <text x="832" y="742">of the same screen.</text>
+    <text x="832" y="766">Grey blocks are text.</text>
+    <text x="832" y="782">Dark buttons are the</text>
+    <text x="832" y="798">main action on a screen.</text>
+  </g>
+
+  <!-- Row 2 badges + labels -->
+  <g font-size="12" font-weight="bold" text-anchor="middle" fill="#fff">
+    <circle cx="40" cy="520" r="13" fill="#222"/><text x="40" y="524">5</text>
+    <circle cx="300" cy="520" r="13" fill="#222"/><text x="300" y="524">6</text>
+    <circle cx="560" cy="520" r="13" fill="#222"/><text x="560" y="524">7</text>
+  </g>
+  <g font-size="12" font-weight="bold" text-anchor="middle" fill="#222">
+    <text x="130" y="882">5 Website, Google, Speed</text>
+    <text x="390" y="882">6 Reviews</text>
+    <text x="650" y="882">7 Settings</text>
+  </g>
+
+  <!-- ===================== ROW 3: states ===================== -->
+  <text x="40" y="940" font-size="13" font-weight="bold" fill="#111">States: loading, offline, error and empty</text>
+
+  <!-- 2a Loading -->
+  <rect x="40" y="960" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="52" y="988" font-size="12" font-weight="bold" fill="#222">Business name</text>
+  <rect x="50" y="1004" width="160" height="70" rx="8" fill="#eee"/>
+  <rect x="50" y="1082" width="160" height="50" rx="8" fill="#eee"/>
+  <rect x="50" y="1140" width="160" height="50" rx="8" fill="#eee"/>
+  <rect x="50" y="1198" width="160" height="50" rx="8" fill="#eee"/>
+  <line x1="40" y1="1264" x2="220" y2="1264" stroke="#999"/>
+  <circle cx="58" cy="1280" r="6" fill="#888"/><circle cx="94" cy="1280" r="6" fill="#ccc"/><circle cx="130" cy="1280" r="6" fill="#ccc"/><circle cx="166" cy="1280" r="6" fill="#ccc"/><circle cx="202" cy="1280" r="6" fill="#ccc"/>
+
+  <!-- 2b Offline -->
+  <rect x="300" y="960" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <rect x="310" y="976" width="160" height="22" rx="4" fill="#444"/>
+  <text x="390" y="991" font-size="8" text-anchor="middle" fill="#fff">You're offline. Showing saved results.</text>
+  <rect x="310" y="1006" width="160" height="100" rx="8" fill="none" stroke="#999"/>
+  <text x="322" y="1040" font-size="22" font-weight="bold" fill="#222">70</text>
+  <rect x="322" y="1052" width="120" height="6" fill="#ccc"/>
+  <rect x="322" y="1076" width="136" height="18" rx="4" fill="#f2f2f2" stroke="#ccc"/>
+  <text x="390" y="1089" font-size="8" text-anchor="middle" fill="#999">Run new check (needs internet)</text>
+  <rect x="310" y="1114" width="77" height="50" rx="6" fill="none" stroke="#999"/>
+  <rect x="393" y="1114" width="77" height="50" rx="6" fill="none" stroke="#999"/>
+  <line x1="300" y1="1264" x2="480" y2="1264" stroke="#999"/>
+  <circle cx="318" cy="1280" r="6" fill="#888"/><circle cx="354" cy="1280" r="6" fill="#ccc"/><circle cx="390" cy="1280" r="6" fill="#ccc"/><circle cx="426" cy="1280" r="6" fill="#ccc"/><circle cx="462" cy="1280" r="6" fill="#ccc"/>
+
+  <!-- 2c Error: site down -->
+  <rect x="560" y="960" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="572" y="988" font-size="11" font-weight="bold" fill="#222">Business name</text>
+  <rect x="570" y="1002" width="160" height="92" rx="8" fill="#f0f0f0" stroke="#444" stroke-width="2"/>
+  <text x="580" y="1022" font-size="10" font-weight="bold" fill="#222">! Your website is down</text>
+  <rect x="580" y="1032" width="130" height="5" fill="#bbb"/><rect x="580" y="1042" width="110" height="5" fill="#bbb"/>
+  <rect x="580" y="1060" width="140" height="22" rx="4" fill="#555"/>
+  <text x="650" y="1075" font-size="9" text-anchor="middle" fill="#fff">What to do now</text>
+  <text x="572" y="1116" font-size="10" fill="#222">Score capped at 35</text>
+  <rect x="570" y="1126" width="160" height="40" rx="6" fill="none" stroke="#bbb" stroke-dasharray="4 3"/>
+  <text x="650" y="1150" font-size="8" text-anchor="middle" fill="#666">Can't check while the site is down</text>
+  <line x1="560" y1="1264" x2="740" y2="1264" stroke="#999"/>
+  <circle cx="578" cy="1280" r="6" fill="#888"/><circle cx="614" cy="1280" r="6" fill="#ccc"/><circle cx="650" cy="1280" r="6" fill="#ccc"/><circle cx="686" cy="1280" r="6" fill="#ccc"/><circle cx="722" cy="1280" r="6" fill="#ccc"/>
+
+  <!-- 6b Empty: reviews not connected -->
+  <rect x="820" y="960" width="180" height="340" rx="18" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="832" y="988" font-size="12" font-weight="bold" fill="#222">Reviews</text>
+  <circle cx="910" cy="1070" r="28" fill="#eee" stroke="#bbb"/>
+  <text x="910" y="1078" font-size="22" text-anchor="middle" fill="#888">&#9734;</text>
+  <text x="910" y="1124" font-size="10" font-weight="bold" text-anchor="middle" fill="#222">Reviews not connected</text>
+  <rect x="850" y="1134" width="120" height="5" fill="#ccc"/><rect x="860" y="1144" width="100" height="5" fill="#ccc"/>
+  <rect x="846" y="1162" width="128" height="22" rx="4" fill="#555"/>
+  <text x="910" y="1177" font-size="9" text-anchor="middle" fill="#fff">How to connect</text>
+  <line x1="820" y1="1264" x2="1000" y2="1264" stroke="#999"/>
+  <circle cx="838" cy="1280" r="6" fill="#ccc"/><circle cx="874" cy="1280" r="6" fill="#ccc"/><circle cx="910" cy="1280" r="6" fill="#ccc"/><circle cx="946" cy="1280" r="6" fill="#888"/><circle cx="982" cy="1280" r="6" fill="#ccc"/>
+
+  <!-- Row 3 labels -->
+  <g font-size="12" font-weight="bold" text-anchor="middle" fill="#222">
+    <text x="130" y="1322">2a Loading</text>
+    <text x="390" y="1322">2b Offline</text>
+    <text x="650" y="1322">2c Error: site down</text>
+    <text x="910" y="1322">6b Empty: not connected</text>
+  </g>
+</svg>
