@@ -1,16 +1,20 @@
 // Runs after `expo export`. Writes the list of built files and a content-based version into dist/sw.js.
 const { createHash } = require('crypto');
-const { readdirSync, readFileSync, writeFileSync } = require('fs');
+const { copyFileSync, readdirSync, readFileSync, writeFileSync } = require('fs');
 const { join, relative, sep } = require('path');
 
 const DIST = join(__dirname, '..', 'dist');
 const SW_PATH = join(DIST, 'sw.js');
+
+// Static hosts such as Vercel show 404.html for unknown addresses.
+copyFileSync(join(DIST, '+not-found.html'), join(DIST, '404.html'));
 
 const EXCLUDED = [
   /^sw\.js$/,
   /^\(app\)\//, // Duplicates of the clean routes.
   /\[.+\]/, // Route templates. The real pages come from generateStaticParams.
   /^\+not-found\.html$/,
+  /^404\.html$/,
   /^assets\/node_modules\/expo-router\//, // Only used by the dev-only error and sitemap screens.
   /^assets\/node_modules\/@react-navigation\//, // Default header icons. The app has no default headers.
   /\.map$/,

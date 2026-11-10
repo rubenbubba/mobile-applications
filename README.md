@@ -46,7 +46,18 @@ npm run build:web   # builds to dist/ and adds the file list to the service work
 npm run serve:web   # serves dist/ on http://localhost:8081
 ```
 
-Put `dist/` on any static host. Installing on a phone requires HTTPS, and the host must serve `/reviews` from `reviews.html`. On Vercel this means setting `cleanUrls` to `true`.
+Installing on a phone requires HTTPS, and the host must serve `/reviews` from `reviews.html`.
+
+### Put it online (Vercel)
+
+The app is hosted on Vercel, and every push to `main` goes live by itself. `vercel.json` holds all the settings:
+
+- Vercel builds with `npm run build:web`, serves `dist/`, and uses clean URLs, so `/reviews` serves `reviews.html`.
+- The service worker and manifest are never cached, so updates arrive.
+- Unknown addresses show the app's not-found page (`404.html`, copied from `+not-found.html` during the build).
+- `CYPRESS_INSTALL_BINARY=0` stops the build from downloading the Cypress test browser.
+
+To set it up once, sign in at [vercel.com](https://vercel.com/signup) with GitHub. Then open [vercel.com/new](https://vercel.com/new), import this repository, and press **Deploy** without changing any settings. Pushes to other branches get their own preview link.
 
 ## Run the tests
 
