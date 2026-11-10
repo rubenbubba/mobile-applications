@@ -1,0 +1,2 @@
+# Runs before every commit (decks 4.2 and chapter 12). The full test suite runs on GitHub after each push (.github/workflows/tests.yml).
+npm run typecheck

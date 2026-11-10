@@ -1,0 +1,44 @@
+# Runs every test on each push and pull request, on the production build.
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build the PWA
+        run: npm run build:web
+
+      - name: End-to-end, logic and layout tests (Cypress)
+        run: |
+          PORT=8085 node scripts/serve-dist.js &
+          npx --yes wait-on@8 http://localhost:8085
+          npx cypress run --config baseUrl=http://localhost:8085
+
+      - name: Offline test (real Chrome)
+        run: npm run test:offline
+
+      - name: Keep screenshots of failed tests
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore

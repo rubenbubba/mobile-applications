@@ -6,6 +6,9 @@ function getStorage(): Storage | undefined {
   }
 }
 
+// localStorage is synchronous, so there is nothing to load first. Native needs this step (storageService.ts).
+export async function preloadStorage(): Promise<void> {}
+
 export const storageService = {
   getItem(key: string): string | undefined {
     return getStorage()?.getItem(key) ?? undefined;
