@@ -92,6 +92,7 @@ function responsePenalty(responseTimeMs: number): number {
 
 function certificatePenalty(data: WebsiteData): number {
   if (!data.httpsEnabled) return 30;
+  if (data.certificateExpiresInDays === undefined) return 0;
   if (data.certificateExpiresInDays < 14) return 20;
   return data.certificateExpiresInDays < 30 ? 5 : 0;
 }

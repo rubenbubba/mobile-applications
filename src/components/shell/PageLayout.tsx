@@ -3,7 +3,7 @@ import { Banner, Screen, Stack, Text, Touchable } from '@/components/primitives'
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { formatDateTime } from '@/logic/format';
-import { getBusiness } from '@/services/monitoringService';
+import { useCurrentBusiness } from '@/hooks/useBusiness';
 import { applyUpdate } from '@/services/pwaService';
 import { useMonitoringStore } from '@/state/useMonitoringStore';
 import { usePwaStore } from '@/state/usePwaStore';
@@ -61,7 +61,7 @@ interface PageLayoutProps {
 export function PageLayout({ title, children, showBusiness = true, description, subNav, leading, testID }: PageLayoutProps) {
   const insets = useSafeAreaInsets();
   const { isWide } = useBreakpoint();
-  const businessId = useMonitoringStore((state) => state.businessId);
+  const business = useCurrentBusiness();
 
   return (
     <Screen padding={isWide ? 'xxl' : 'lg'} maxWidth={CONTENT_MAX_WIDTH} topInset={insets.top} testID={testID}>
@@ -70,7 +70,7 @@ export function PageLayout({ title, children, showBusiness = true, description, 
         <UpdateBanner />
         {leading}
         <Stack gap="xs">
-          {showBusiness && <Text size="sm" tone="muted">{getBusiness(businessId).name}</Text>}
+          {showBusiness && business !== undefined && <Text size="sm" tone="muted">{business.name}</Text>}
           {title !== undefined && <Text size="xxl" weight="bold" heading={1}>{title}</Text>}
           {description !== undefined && <Text tone="secondary">{description}</Text>}
         </Stack>

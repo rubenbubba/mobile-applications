@@ -35,6 +35,13 @@ jobs:
       - name: Offline test (real Chrome)
         run: npm run test:offline
 
+      - name: Account tests (build with fake Supabase keys)
+        run: |
+          npm run build:web:stub
+          PORT=8086 node scripts/serve-dist.js &
+          npx --yes wait-on@8 http://localhost:8086
+          npx cypress run --config baseUrl=http://localhost:8086,specPattern=cypress/live/*.cy.ts
+
       - name: Keep screenshots of failed tests
         if: failure()
         uses: actions/upload-artifact@v4
