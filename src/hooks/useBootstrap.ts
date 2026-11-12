@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+// The single-set import, like the Icon component. The package's main entry would bundle all 19 icon fonts.
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { subscribeToAuth } from '../services/authService';
 import { startPwa } from '../services/pwaService';
 import { preloadStorage } from '../services/storageService';
@@ -14,8 +16,12 @@ export function useBootstrap(): void {
   useEffect(() => {
     const finish = useBootStore.getState().setReady;
 
+    // The icon font loads behind the splash screen. Otherwise every icon starts the download itself, and a
+    // connection that drops halfway leaves a failed load nobody handles (icons then show as empty boxes).
+    const iconFont = Ionicons.loadFont().catch(() => undefined);
+
     // Native storage must be loaded into memory before the stores read it. On the web this resolves at once.
-    preloadStorage()
+    const savedState = preloadStorage()
       .then(() =>
         Promise.all([
           useAuthStore.persist.rehydrate(),
@@ -24,8 +30,9 @@ export function useBootstrap(): void {
         ]),
       )
       // With real accounts, Supabase decides who is signed in (the saved copy may have expired).
-      .then(() => useAuthStore.getState().syncSession())
-      .finally(finish);
+      .then(() => useAuthStore.getState().syncSession());
+
+    Promise.all([iconFont, savedState]).finally(finish);
 
     // Sign-ins from email links, expired sessions and sign-outs on another tab.
     const stopAuth = subscribeToAuth((event, user) => {
