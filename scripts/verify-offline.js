@@ -63,8 +63,9 @@ function startServer() {
   });
 }
 
+// Up to 30 seconds: a cold Chrome start on a busy CI machine can take longer than 15.
 async function connect() {
-  for (let attempt = 0; attempt < 60; attempt += 1) {
+  for (let attempt = 0; attempt < 120; attempt += 1) {
     await sleep(250);
     try {
       const targets = await (await fetch(`http://127.0.0.1:${DEBUG_PORT}/json/list`)).json();

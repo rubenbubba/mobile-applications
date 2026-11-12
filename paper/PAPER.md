@@ -3,7 +3,7 @@
 **Mobile Applications, UCLL, 2026–2027, assignment 1 (PWA)**
 Author: Ruben Bubba
 
-- Live app: ✏️ *add the Vercel link*
+- Live app: https://mobile-applications-six.vercel.app
 - Code: https://github.com/rubenbubba/mobile-applications
 
 > **How to read this draft.** Sections marked ✏️ need input from real people: interviews, test sessions, store ratings. The course asks for real research ("an invented persona only confirms your own assumptions"), so those parts are left as templates rather than made up. Everything else describes the app as it is built.
@@ -115,9 +115,9 @@ Written from the user's point of view and grouped by cluster. "Data source" show
 
 | As an owner I want to… | so that… | The app returns | Data source | Native feature |
 |---|---|---|---|---|
-| log in | my data is private | my dashboard | Demo login now. Supabase Auth is built on a separate branch. | — |
+| log in | my data is private | my dashboard | Supabase Auth (real accounts). "Explore with sample data" opens the demo without an account. | — |
 | try the app with sample data | I can see what it does before I sign up | three sample businesses | demo | — |
-| create an account and reset my password | I can start on my own | a confirmation email | Supabase Auth (separate branch) | — |
+| create an account and reset my password | I can start on my own | a working account straight away, and a reset link by email | Supabase Auth | — |
 | install the app on my home screen | it opens like an app | an install prompt, or iPhone instructions | browser | home screen |
 
 ### Overview (Home)
@@ -127,7 +127,7 @@ Written from the user's point of view and grouped by cluster. "Data source" show
 | see one overall score | I know in one second whether things are OK | a score from 0 to 100, its status and a one-line summary | calculated in `src/logic/` from the four areas |
 | see what to fix first | I don't have to prioritise myself | the top issues, sorted by severity | issue rules in `src/logic/issueRules.ts` |
 | see my score over time | I can see whether my work pays off | an 11-week chart and recent changes | check history |
-| run a new check | fixes get confirmed | an updated score and "Fix confirmed" entries | demo (simulated). Live check is planned. |
+| run a new check | fixes get confirmed | an updated score and "Fix confirmed" entries | demo: simulated. With an account: the server really checks the site. |
 
 ### Issues
 
@@ -141,10 +141,10 @@ Written from the user's point of view and grouped by cluster. "Data source" show
 
 | As an owner I want to… | so that… | The app returns | Data source |
 |---|---|---|---|
-| know whether my website is up | I hear about it before my customers do | status, response time, 30-day availability, HTTPS and certificate | demo |
+| know whether my website is up | I hear about it before my customers do | status, response time, 30-day availability, HTTPS and certificate | demo, or **live** with an account (checked every 10 minutes) |
 | test any website right now | I can check after a fix | a real test from my phone (responded, no response, or timed out) | **live** |
-| know whether Google can show my pages well | I'm found | titles, descriptions, headings, hidden pages, broken links, sitemap | demo |
-| know whether my site is fast on a phone | visitors don't leave | load time and Core Web Vitals in plain words, plus what slows the site down | demo |
+| know whether Google can show my pages well | I'm found | titles, descriptions, headings, hidden pages, broken links, sitemap | demo, or **live** with an account |
+| know whether my site is fast on a phone | visitors don't leave | load time and Core Web Vitals in plain words, plus what slows the site down | demo, or **live** with an account (needs a PageSpeed key) |
 
 ### Reviews
 
@@ -167,7 +167,7 @@ Written from the user's point of view and grouped by cluster. "Data source" show
 | **Offline** | A banner, saved results stay visible, and "Run new check" is turned off with an explanation |
 | **Unknown address** | A friendly not-found page |
 | **New version** | An update message with a button that reloads into the new version |
-| Delete data, download data | ✏️ *Planned with the Supabase version (see MoSCoW)* |
+| Privacy | A privacy policy (linked before signing up and from Settings), "Download my data" as a file, and "Delete my account", which removes everything |
 
 ## 5. Competitors
 
@@ -251,10 +251,10 @@ Planned backwards from the final deadline (31 Dec 2026), with margin over the ho
 |---|---|---|---|
 | M1 | 07 Oct 2026 | Idea submitted by email | ✏️ *confirm* |
 | M2 | 03 Nov 2026 | PWA with all 7 screens on demo data, offline support, and 92 passing end-to-end tests | Done |
-| M3 | 10 Nov 2026 | PWA online over HTTPS, installable on a phone, paper submitted with the GitHub link | Today |
+| M3 | 10 Nov 2026 | PWA online over HTTPS, installable on a phone, paper submitted with the GitHub link | Done (online since 12 Nov) |
 | M4 | 17 Nov 2026 | Tested with 3 people from the target group, findings written down and the top 3 fixed | ✏️ |
-| M5 | 24 Nov 2026 | Real accounts: register, log in and reset a password with Supabase, data protected by row level security | Code ready on a branch |
-| M6 | 01 Dec 2026 | Real checks: availability every 10 minutes, speed and Google checks through server functions | Code ready on a branch |
+| M5 | 24 Nov 2026 | Real accounts: register, log in and reset a password with Supabase, data protected by row level security | Done (12 Nov) |
+| M6 | 01 Dec 2026 | Real checks: availability every 10 minutes, speed and Google checks through server functions | Done (12 Nov); speed needs a PageSpeed key |
 | M7 | 08 Dec 2026 | Native app runs on a real Android phone and iPhone (EAS development builds), with storage and network detection | Partly done |
 | M8 | 15 Dec 2026 | Native feature: push notification within 10 minutes of the website going down | Planned |
 | M9 | 22 Dec 2026 | Tested on physical devices, accessibility checked, bugs fixed | Planned |
@@ -297,10 +297,10 @@ gantt
 | Push notification when the website goes down | M8 |
 
 **Should have**
-- Real accounts with registration and password reset (M5)
-- Real website availability and speed checks (M6)
-- Actions saved offline and sent when the connection returns (M5)
-- Privacy policy, "Download my data" and "Delete my account" (M5)
+- Real accounts with registration and password reset (M5, done)
+- Real website availability and speed checks (M6, done)
+- Actions saved offline and sent when the connection returns (M5, done)
+- Privacy policy, "Download my data" and "Delete my account" (M5, done)
 
 **Could have**
 - Real Google reviews. This needs the Google Places or Business Profile API, which needs a billing account.
