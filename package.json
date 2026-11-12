@@ -15,6 +15,7 @@
     "build-storybook": "storybook build",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "build:web:demo": "node scripts/build-web-demo.js",
     "build:web:stub": "node scripts/build-web-stub.js",
     "test:accounts": "cypress run --config specPattern=cypress/live/*.cy.ts",
     "capture:screens": "cypress run --config specPattern=cypress/capture/*.cy.ts,screenshotsFolder=paper/screens,trashAssetsBeforeRuns=false",

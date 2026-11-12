@@ -117,18 +117,18 @@ Supabase's built-in email service only sends to the project team's own addresses
 Test the production build, because the service worker doesn't run on the dev server.
 
 ```bash
-npm run build:web
+npm run build:web:demo # a demo build that ignores .env
 npm run serve:web      # leave this running in a second terminal
 npm run cypress:run    # 98 end-to-end, logic, layout and privacy tests
 npm run test:offline   # shuts a server down and checks the app still works in real Chrome
 npm run typecheck
 
-npm run build:web:stub # a build with fake Supabase keys
+npm run build:web:stub # a build with fake Supabase keys (also ignores .env)
 npm run test:accounts  # 10 tests: register, log in, first check, offline queue, delete account
-npm run build:web      # back to the normal build
+npm run build:web      # back to the normal build, which uses .env
 ```
 
-The account tests answer every Supabase request themselves, so they need no real project. GitHub Actions runs all of these on every push (`.github/workflows/tests.yml`), and the pre-commit hook runs the typecheck.
+The main suite tests the demo, so it uses a build that ignores `.env`. The account tests answer every Supabase request themselves, so they never touch the real project. GitHub Actions runs all of these on every push (`.github/workflows/tests.yml`), and the pre-commit hook runs the typecheck.
 
 If Cypress fails with `bad option: --smoke-test` in a VS Code terminal, the terminal has set `ELECTRON_RUN_AS_NODE`. Clear that variable, or use another terminal.
 

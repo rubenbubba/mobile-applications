@@ -5,6 +5,8 @@ const { execSync } = require('child_process');
 
 const env = {
   ...process.env,
+  // Never read .env here: its real keys would otherwise replace the fake ones and the tests would hit the real project.
+  EXPO_NO_DOTENV: '1',
   EXPO_PUBLIC_SUPABASE_URL: 'https://stub.supabase.co',
   EXPO_PUBLIC_SUPABASE_ANON_KEY: 'stub-anon-key',
 };

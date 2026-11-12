@@ -23,8 +23,8 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Build the PWA
-        run: npm run build:web
+      - name: Build the PWA (demo mode)
+        run: npm run build:web:demo
 
       - name: End-to-end, logic and layout tests (Cypress)
         run: |
