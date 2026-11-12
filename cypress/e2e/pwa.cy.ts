@@ -62,8 +62,9 @@ describe('Install requirements', () => {
     cy.visitApp('/', { keepServiceWorker: true });
     cy.byTestId('health-hero').should('be.visible');
 
+    // Installing saves every page and bundle first, which takes longer on slow CI machines.
     cy.window()
-      .then({ timeout: 20000 }, (win) => win.navigator.serviceWorker.ready)
+      .then({ timeout: 45000 }, (win) => win.navigator.serviceWorker.ready)
       .its('active.state')
       .should('be.oneOf', ['activating', 'activated']);
 

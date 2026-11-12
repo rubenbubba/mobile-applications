@@ -3,6 +3,7 @@ import { Banner, Card, EmptyState, Row, SegmentedControl, Stack, Tag, Text } fro
 import { AREA_META, AREA_ORDER } from '@/components/shared/areaMeta';
 import { IssueList } from '@/components/shared/IssueList';
 import { RunCheckButton } from '@/components/shared/RunCheckButton';
+import { useIsLiveAccount } from '@/hooks/useAccount';
 import { pluralize } from '@/logic/format';
 import type { Overview } from '@/logic/overview';
 import type { IssueState, Severity } from '@/types/Issue';
@@ -29,6 +30,7 @@ export function IssuesPanel({ overview }: { overview: Overview }) {
   const [state, setState] = useState<IssueState>('open');
   const [severities, setSeverities] = useState<Severity[]>([]);
   const [areas, setAreas] = useState<Area[]>([]);
+  const isLive = useIsLiveAccount();
   const { issues } = overview;
 
   const count = (target: IssueState) => issues.filter((issue) => issue.state === target).length;
@@ -102,7 +104,7 @@ export function IssuesPanel({ overview }: { overview: Overview }) {
         )}
       </Card>
 
-      <Banner icon="flask-outline" message="These issues are worked out from demo data." />
+      {!isLive && <Banner icon="flask-outline" message="These issues are worked out from demo data." />}
     </Stack>
   );
 }

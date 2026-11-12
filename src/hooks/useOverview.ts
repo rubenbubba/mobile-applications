@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { deriveOverview, type Overview } from '../logic/overview';
-import { getBusiness } from '../services/monitoringService';
 import { useMonitoringStore } from '../state/useMonitoringStore';
+import { useCurrentBusiness } from './useBusiness';
 import type { ChangeEntry } from '../types/Monitoring';
 import type { IssueId } from '../types/Issue';
 import { useOnlineStatus } from './useOnlineStatus';
@@ -16,7 +16,7 @@ const NO_CHANGES: ChangeEntry[] = [];
 const STALE_AFTER_MS = 24 * 60 * 60 * 1000;
 
 export function useOverview(): OverviewState {
-  const businessId = useMonitoringStore((state) => state.businessId);
+  const business = useCurrentBusiness();
   const snapshot = useMonitoringStore((state) => state.snapshots[state.businessId]);
   const markedFixed = useMonitoringStore((state) => state.markedFixed[state.businessId] ?? NO_ISSUES);
   const verifiedFixes = useMonitoringStore((state) => state.verifiedFixes[state.businessId] ?? NO_ISSUES);
@@ -25,11 +25,11 @@ export function useOverview(): OverviewState {
   const load = useMonitoringStore((state) => state.load);
 
   return useMemo<OverviewState>(() => {
-    if (snapshot !== undefined) {
+    if (snapshot !== undefined && business !== undefined) {
       return {
         kind: 'ready',
         overview: deriveOverview({
-          business: getBusiness(businessId),
+          business,
           snapshot,
           progress: { markedFixed, verifiedFixes },
           checkLog,
@@ -39,7 +39,7 @@ export function useOverview(): OverviewState {
     }
 
     return errorMessage !== undefined ? { kind: 'error', message: errorMessage, retry: load } : { kind: 'loading' };
-  }, [businessId, snapshot, markedFixed, verifiedFixes, checkLog, errorMessage, load]);
+  }, [business, snapshot, markedFixed, verifiedFixes, checkLog, errorMessage, load]);
 }
 
 // Loads the selected business once, refreshes old results, and retries when the connection returns.

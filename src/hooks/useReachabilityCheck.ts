@@ -1,7 +1,19 @@
 import { useCallback, useState } from 'react';
 import { normalizeWebsiteUrl } from '../logic/url';
+import { getDataMode } from '../services/dataMode';
+import { checkUrlOnServer } from '../services/liveMonitoringService';
 import { checkReachability } from '../services/reachabilityService';
 import type { ReachabilityResult } from '../types/Monitoring';
+
+// Signed-in accounts test from the server, which can read the status code. The demo tests from this device.
+async function runTest(url: string): Promise<ReachabilityResult> {
+  if (getDataMode() !== 'live') return checkReachability(url);
+  try {
+    return await checkUrlOnServer(url);
+  } catch {
+    return checkReachability(url);
+  }
+}
 
 export function useReachabilityCheck() {
   const [input, setInput] = useState('');
@@ -20,7 +32,7 @@ export function useReachabilityCheck() {
 
     setError(undefined);
     setIsChecking(true);
-    setResult(await checkReachability(normalized.url));
+    setResult(await runTest(normalized.url));
     setIsChecking(false);
   }, [input]);
 

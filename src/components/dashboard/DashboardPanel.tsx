@@ -1,5 +1,6 @@
 import { Banner, Grid, Row, Stack } from '@/components/primitives';
 import { AREA_ORDER } from '@/components/shared/areaMeta';
+import { useIsLiveAccount } from '@/hooks/useAccount';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import type { Overview } from '@/logic/overview';
 import { AreaTile } from './AreaTile';
@@ -10,6 +11,7 @@ import { ScoreTrendCard } from './ScoreTrendCard';
 
 export function DashboardPanel({ overview }: { overview: Overview }) {
   const { isWide, isTablet } = useBreakpoint();
+  const isLive = useIsLiveAccount();
 
   const tiles = (
     <Grid columns={isTablet ? 4 : 2}>
@@ -40,11 +42,13 @@ export function DashboardPanel({ overview }: { overview: Overview }) {
       <HealthHero overview={overview} />
       {tiles}
       {details}
-      <Banner
-        icon="flask-outline"
-        message="You are viewing demo data for a fictional business. See Settings for which data sources are connected."
-        testID="demo-data-note"
-      />
+      {!isLive && (
+        <Banner
+          icon="flask-outline"
+          message="You are viewing demo data for a fictional business. See Settings for which data sources are connected."
+          testID="demo-data-note"
+        />
+      )}
     </Stack>
   );
 }

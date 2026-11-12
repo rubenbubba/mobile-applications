@@ -21,7 +21,8 @@ export interface WebsiteData {
   responseTimeMs: number;
   uptimeDays: UptimeDay[];
   httpsEnabled: boolean;
-  certificateExpiresInDays: number;
+  // Unknown for real checks: server functions can see that the certificate is valid, but not its end date.
+  certificateExpiresInDays?: number;
   redirectsToHttps: boolean;
   mobileFriendly: boolean;
 }
@@ -116,4 +117,6 @@ export interface ReachabilityResult {
   outcome: 'responded' | 'no-response' | 'timed-out';
   durationMs: number;
   checkedAt: string;
+  // Only known when the test ran on the server (signed-in accounts). The browser cannot read it.
+  statusCode?: number;
 }

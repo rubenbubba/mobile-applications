@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { Badge, Divider, Radio, Row, Stack, Text } from '@/components/primitives';
+import { Badge, Divider, Expandable, Radio, Row, Stack, Text } from '@/components/primitives';
 import { StyledButton } from '@/components/StyledButton';
+import { AddBusinessForm } from '@/components/business/AddBusinessForm';
 import { SourceBadge } from '@/components/shared/Badges';
 import { SectionCard } from '@/components/shared/SectionCard';
-import { listBusinesses } from '@/services/monitoringService';
+import { useIsLiveAccount } from '@/hooks/useAccount';
+import { useCurrentBusiness } from '@/hooks/useBusiness';
+import { describeBusiness } from '@/logic/business';
+import { downloadMyData } from '@/services/privacyService';
 import { promptInstall } from '@/services/pwaService';
 import { useAuthStore } from '@/state/useAuthStore';
 import { useMonitoringStore } from '@/state/useMonitoringStore';
@@ -19,11 +23,24 @@ const THEME_OPTIONS: { value: ThemeMode; label: string }[] = [
   { value: 'dark', label: 'Dark' },
 ];
 
-const DATA_SOURCES: { name: string; detail: string; source: DataSource }[] = [
+interface DataSourceRow {
+  name: string;
+  detail: string;
+  source?: DataSource;
+}
+
+const DEMO_SOURCES: DataSourceRow[] = [
   { name: 'Website monitoring', detail: 'Sample results. A real check needs a server to run around the clock.', source: 'demo' },
   { name: 'Google reviews', detail: 'Sample reviews. Real reviews need a connected Google Business Profile.', source: 'demo' },
   { name: 'Search and speed checks', detail: 'Sample results. Real results need Google PageSpeed through a server.', source: 'demo' },
   { name: '"Test a website now"', detail: 'A real test from this device, on the Website screen.', source: 'live' },
+];
+
+const LIVE_SOURCES: DataSourceRow[] = [
+  { name: 'Website monitoring', detail: 'Our server checks your website every 10 minutes, also when the app is closed.', source: 'live' },
+  { name: 'Search and speed checks', detail: 'Your pages and Google PageSpeed, each time you run a check.', source: 'live' },
+  { name: 'Google reviews', detail: 'Not connected yet. This needs access to your Google Business Profile.' },
+  { name: '"Test a website now"', detail: 'A real test from our server, on the Website screen.', source: 'live' },
 ];
 
 function isThemeMode(value: string): value is ThemeMode {
@@ -63,26 +80,29 @@ function InstallSection() {
   );
 }
 
-export function SettingsPanel() {
+function BusinessSection() {
+  const isLive = useIsLiveAccount();
+  const businesses = useMonitoringStore((state) => state.businesses);
   const businessId = useMonitoringStore((state) => state.businessId);
   const selectBusiness = useMonitoringStore((state) => state.selectBusiness);
-  const resetDemo = useMonitoringStore((state) => state.resetDemo);
-  const themeMode = useSettingsStore((state) => state.themeMode);
-  const setThemeMode = useSettingsStore((state) => state.setThemeMode);
-  const logout = useAuthStore((state) => state.logout);
-  const user = useAuthStore((state) => state.user);
+  const removeBusiness = useMonitoringStore((state) => state.removeBusiness);
+  const current = useCurrentBusiness();
   const showToast = useToastStore((state) => state.showToast);
-  const [isConfirmingReset, setIsConfirmingReset] = useState(false);
+  const [isConfirmingRemove, setIsConfirmingRemove] = useState(false);
 
   return (
-    <Stack gap="lg">
-      <SectionCard title="Business" description="These sample businesses are fictional. Each one shows a different situation." testID="settings-business">
+    <SectionCard
+      title={isLive ? 'Your businesses' : 'Business'}
+      description={isLive ? undefined : 'These sample businesses are fictional. Each one shows a different situation.'}
+      testID="settings-business"
+    >
+      <Stack gap="md">
         <Stack role="radiogroup">
-          {listBusinesses().map((business) => (
+          {businesses.map((business) => (
             <Radio
               key={business.id}
               label={business.name}
-              description={`${business.category} in ${business.city}`}
+              description={describeBusiness(business)}
               value={business.id}
               selected={business.id === businessId}
               onSelect={selectBusiness}
@@ -90,7 +110,143 @@ export function SettingsPanel() {
             />
           ))}
         </Stack>
-      </SectionCard>
+
+        {isLive && (
+          <>
+            <Expandable title="Add a business" testID="settings-add-business">
+              <AddBusinessForm onAdded={() => showToast({ message: 'Business added. Run a check to see its results.', variant: 'success' })} />
+            </Expandable>
+
+            {current !== undefined &&
+              (isConfirmingRemove ? (
+                <Stack gap="sm" testID="remove-business-confirm">
+                  <Text>Remove {current.name}? Its check results are deleted too.</Text>
+                  <Row gap="sm" wrap>
+                    <StyledButton
+                      label="Yes, remove"
+                      variant="danger"
+                      onPress={async () => {
+                        setIsConfirmingRemove(false);
+                        try {
+                          await removeBusiness(current.id);
+                          showToast({ message: `${current.name} was removed.`, variant: 'success' });
+                        } catch (caught) {
+                          showToast({ message: caught instanceof Error ? caught.message : 'Could not remove it.', variant: 'error' });
+                        }
+                      }}
+                      testID="remove-business-yes"
+                    />
+                    <StyledButton label="Keep it" variant="secondary" onPress={() => setIsConfirmingRemove(false)} />
+                  </Row>
+                </Stack>
+              ) : (
+                <StyledButton
+                  label={`Remove ${current.name}`}
+                  variant="ghost"
+                  icon="trash-outline"
+                  onPress={() => setIsConfirmingRemove(true)}
+                  testID="remove-business"
+                />
+              ))}
+          </>
+        )}
+      </Stack>
+    </SectionCard>
+  );
+}
+
+function PrivacySection() {
+  const isLive = useIsLiveAccount();
+  const deleteAccount = useAuthStore((state) => state.deleteAccount);
+  const clearAccountData = useMonitoringStore((state) => state.clearAccountData);
+  const resetDemo = useMonitoringStore((state) => state.resetDemo);
+  const showToast = useToastStore((state) => state.showToast);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  return (
+    <SectionCard title="Privacy" description="See what we store, take a copy, or delete it." testID="settings-privacy">
+      <Stack gap="sm">
+        <StyledButton
+          label="Privacy policy"
+          variant="secondary"
+          icon="shield-checkmark-outline"
+          onPress={() => router.push('/privacy')}
+          testID="privacy-link"
+        />
+        <StyledButton
+          label="Download my data"
+          variant="secondary"
+          icon="download-outline"
+          onPress={async () => {
+            try {
+              await downloadMyData();
+            } catch {
+              showToast({ message: 'Your data could not be collected. Check your connection.', variant: 'error' });
+            }
+          }}
+          testID="download-data"
+        />
+        {isConfirmingDelete ? (
+          <Stack gap="sm" testID="delete-account-confirm">
+            <Text>
+              {isLive
+                ? 'This deletes your account, your businesses and all their results. It cannot be undone.'
+                : 'This deletes everything the demo saved on this device and logs you out.'}
+            </Text>
+            <Row gap="sm" wrap>
+              <StyledButton
+                label={isLive ? 'Yes, delete my account' : 'Yes, delete'}
+                variant="danger"
+                isLoading={isDeleting}
+                onPress={async () => {
+                  setIsDeleting(true);
+                  try {
+                    await deleteAccount();
+                    if (isLive) clearAccountData();
+                    else await resetDemo();
+                    router.replace('/login');
+                  } catch (caught) {
+                    showToast({ message: caught instanceof Error ? caught.message : 'Could not delete.', variant: 'error' });
+                  } finally {
+                    setIsDeleting(false);
+                    setIsConfirmingDelete(false);
+                  }
+                }}
+                testID="delete-account-yes"
+              />
+              <StyledButton label="Cancel" variant="secondary" onPress={() => setIsConfirmingDelete(false)} />
+            </Row>
+          </Stack>
+        ) : (
+          <StyledButton
+            label={isLive ? 'Delete my account' : 'Delete my data'}
+            variant="ghost"
+            icon="trash-outline"
+            onPress={() => setIsConfirmingDelete(true)}
+            testID="delete-account"
+          />
+        )}
+      </Stack>
+    </SectionCard>
+  );
+}
+
+export function SettingsPanel() {
+  const isLive = useIsLiveAccount();
+  const resetDemo = useMonitoringStore((state) => state.resetDemo);
+  const clearAccountData = useMonitoringStore((state) => state.clearAccountData);
+  const themeMode = useSettingsStore((state) => state.themeMode);
+  const setThemeMode = useSettingsStore((state) => state.setThemeMode);
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
+  const showToast = useToastStore((state) => state.showToast);
+  const [isConfirmingReset, setIsConfirmingReset] = useState(false);
+  const sources = isLive ? LIVE_SOURCES : DEMO_SOURCES;
+
+  return (
+    <Stack gap="lg">
+      <BusinessSection />
 
       <SectionCard title="Appearance" testID="settings-theme">
         <Stack role="radiogroup">
@@ -119,7 +275,7 @@ export function SettingsPanel() {
 
       <SectionCard title="Where your data comes from" testID="settings-sources">
         <Stack gap="sm">
-          {DATA_SOURCES.map((item, index) => (
+          {sources.map((item, index) => (
             <Stack key={item.name} gap="sm">
               {index > 0 && <Divider />}
               <Row justify="space-between" align="flex-start" gap="md">
@@ -127,40 +283,45 @@ export function SettingsPanel() {
                   <Text weight="medium">{item.name}</Text>
                   <Text size="sm" tone="secondary">{item.detail}</Text>
                 </Stack>
-                <SourceBadge source={item.source} />
+                {item.source !== undefined && <SourceBadge source={item.source} />}
               </Row>
             </Stack>
           ))}
         </Stack>
       </SectionCard>
 
+      <PrivacySection />
+
       <SectionCard title="Account" description={user !== undefined ? `Signed in as ${user.email}` : undefined} testID="settings-account">
         <Stack gap="sm">
-          {isConfirmingReset ? (
-            <Stack gap="sm" testID="reset-confirm">
-              <Text>This clears your fixes, replies and check history for all sample businesses.</Text>
-              <Row gap="sm" wrap>
-                <StyledButton
-                  label="Yes, reset"
-                  variant="danger"
-                  onPress={async () => {
-                    setIsConfirmingReset(false);
-                    await resetDemo();
-                    showToast({ message: 'Demo data has been reset.', variant: 'success' });
-                  }}
-                  testID="reset-confirm-yes"
-                />
-                <StyledButton label="Keep my data" variant="secondary" onPress={() => setIsConfirmingReset(false)} />
-              </Row>
-            </Stack>
-          ) : (
-            <StyledButton label="Reset demo data" variant="secondary" onPress={() => setIsConfirmingReset(true)} testID="reset-demo" />
-          )}
+          {!isLive &&
+            (isConfirmingReset ? (
+              <Stack gap="sm" testID="reset-confirm">
+                <Text>This clears your fixes, replies and check history for all sample businesses.</Text>
+                <Row gap="sm" wrap>
+                  <StyledButton
+                    label="Yes, reset"
+                    variant="danger"
+                    onPress={async () => {
+                      setIsConfirmingReset(false);
+                      await resetDemo();
+                      showToast({ message: 'Demo data has been reset.', variant: 'success' });
+                    }}
+                    testID="reset-confirm-yes"
+                  />
+                  <StyledButton label="Keep my data" variant="secondary" onPress={() => setIsConfirmingReset(false)} />
+                </Row>
+              </Stack>
+            ) : (
+              <StyledButton label="Reset demo data" variant="secondary" onPress={() => setIsConfirmingReset(true)} testID="reset-demo" />
+            ))}
           <StyledButton
             label="Log out"
             variant="ghost"
             onPress={async () => {
               await logout();
+              // A real account's results do not stay on a shared device.
+              if (isLive) clearAccountData();
               router.replace('/login');
             }}
             testID="logout"

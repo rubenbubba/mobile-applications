@@ -23,6 +23,7 @@
   "exclude": [
     "cypress",
     "public",
-    "dist"
+    "dist",
+    "supabase"
   ]
 }

@@ -106,13 +106,15 @@ export const ISSUE_RULES: IssueRule[] = [
       'Ask them to turn on automatic renewal so this does not happen again.',
     ],
     canMarkFixed: true,
-    detect: ({ website }) =>
-      website?.isUp === true && website.httpsEnabled && website.certificateExpiresInDays < 30
+    detect: ({ website }) => {
+      const days = website?.certificateExpiresInDays;
+      return website?.isUp === true && website.httpsEnabled && days !== undefined && days < 30
         ? {
-            severity: website.certificateExpiresInDays < 14 ? 'high' : 'medium',
-            explanation: `Your site's security certificate expires in ${pluralize(website.certificateExpiresInDays, 'day')}. After that, browsers warn visitors that your site is not safe.`,
+            severity: days < 14 ? 'high' : 'medium',
+            explanation: `Your site's security certificate expires in ${pluralize(days, 'day')}. After that, browsers warn visitors that your site is not safe.`,
           }
-        : undefined,
+        : undefined;
+    },
   },
   {
     id: 'no-https-redirect',

@@ -68,8 +68,12 @@ export function HealthHero({ overview }: { overview: Overview }) {
         {isTablet ? <Row gap="sm" wrap>{actions}</Row> : <Stack gap="sm">{actions}</Stack>}
 
         <Row gap="sm" wrap>
-          <SourceBadge source="demo" />
-          <Text size="sm" tone="muted" testID="last-checked">Last checked {formatRelativeTime(snapshot.fetchedAt, now)}</Text>
+          {snapshot.website.source !== 'unavailable' && <SourceBadge source={snapshot.website.source} />}
+          <Text size="sm" tone="muted" testID="last-checked">
+            {snapshot.website.source !== 'unavailable'
+              ? `Last checked ${formatRelativeTime(snapshot.fetchedAt, now)}`
+              : 'Not checked yet'}
+          </Text>
         </Row>
 
         <ScoreExplainer />

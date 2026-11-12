@@ -1,4 +1,5 @@
 import { computeAreaScores, computeOverallScore } from '../../logic/scoring';
+import { toSections as toSharedSections } from '../../logic/sections';
 import type { IssueId } from '../../types/Issue';
 import type {
   ChangeEntry,
@@ -237,24 +238,16 @@ function applyFix(raw: DemoRaw, id: IssueId, now: Date, definition: DemoDefiniti
 }
 
 function toSections(raw: DemoRaw, checkedAt: string): SnapshotSections {
-  const siteDownReason = 'Your website was not responding, so this check could not run.';
-
-  return {
-    website: { source: 'demo', value: raw.website, checkedAt },
-    reviews: raw.reviewsConnected
-      ? { source: 'demo', value: raw.reviews, checkedAt }
-      : {
-          source: 'unavailable',
-          reasonCode: 'not-connected',
-          reason: 'Your Google Business Profile is not connected yet.',
-        },
-    seo: raw.website.isUp
-      ? { source: 'demo', value: raw.seo, checkedAt }
-      : { source: 'unavailable', reasonCode: 'site-down', reason: siteDownReason },
-    performance: raw.website.isUp
-      ? { source: 'demo', value: raw.performance, checkedAt }
-      : { source: 'unavailable', reasonCode: 'site-down', reason: siteDownReason },
-  };
+  return toSharedSections(
+    {
+      website: raw.website,
+      seo: raw.seo,
+      performance: raw.performance,
+      reviews: raw.reviewsConnected ? raw.reviews : undefined,
+    },
+    'demo',
+    checkedAt,
+  );
 }
 
 function rawAtWeek(definition: DemoDefinition, raw: DemoRaw, weeksAgo: number, weekEnd: Date): DemoRaw {

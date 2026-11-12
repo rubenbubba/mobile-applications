@@ -59,8 +59,12 @@ export function WebsitePanel({ overview }: { overview: Overview }) {
             <CheckRow label="Secure connection" detail={data.httpsEnabled ? 'Your site uses https.' : 'Your site does not use https.'} passed={data.httpsEnabled} />
             <CheckRow
               label="Security certificate"
-              detail={`Expires in ${pluralize(data.certificateExpiresInDays, 'day')}.`}
-              passed={data.certificateExpiresInDays >= 30}
+              detail={
+                data.certificateExpiresInDays !== undefined
+                  ? `Expires in ${pluralize(data.certificateExpiresInDays, 'day')}.`
+                  : 'Valid. The expiry date is not checked yet.'
+              }
+              passed={data.certificateExpiresInDays === undefined || data.certificateExpiresInDays >= 30}
             />
             <CheckRow
               label="Sends visitors to the secure version"

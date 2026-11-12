@@ -14,7 +14,7 @@ interface InputFieldProps {
   error?: string;
   hint?: string;
   keyboardType?: KeyboardTypeOptions;
-  autoComplete?: 'email' | 'current-password' | 'url' | 'off';
+  autoComplete?: 'email' | 'current-password' | 'new-password' | 'url' | 'off';
   onSubmitEditing?: () => void;
   testID?: string;
 }
